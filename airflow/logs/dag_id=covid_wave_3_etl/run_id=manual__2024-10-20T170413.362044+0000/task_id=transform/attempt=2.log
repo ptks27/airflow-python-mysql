@@ -1,0 +1,13 @@
+[2024-10-20T17:11:23.554+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: covid_wave_3_etl.transform manual__2024-10-20T17:04:13.362044+00:00 [queued]>
+[2024-10-20T17:11:23.564+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: covid_wave_3_etl.transform manual__2024-10-20T17:04:13.362044+00:00 [queued]>
+[2024-10-20T17:11:23.565+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2024-10-20T17:11:23.578+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): transform> on 2024-10-20 17:04:13.362044+00:00
+[2024-10-20T17:11:23.584+0000] {standard_task_runner.py:57} INFO - Started process 139 to run task
+[2024-10-20T17:11:23.587+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'covid_wave_3_etl', 'transform', 'manual__2024-10-20T17:04:13.362044+00:00', '--job-id', '546', '--raw', '--subdir', 'DAGS_FOLDER/covid_wave_3.py', '--cfg-path', '/tmp/tmp3hujz2q7']
+[2024-10-20T17:11:23.588+0000] {standard_task_runner.py:85} INFO - Job 546: Subtask transform
+[2024-10-20T17:11:23.638+0000] {task_command.py:416} INFO - Running <TaskInstance: covid_wave_3_etl.transform manual__2024-10-20T17:04:13.362044+00:00 [running]> on host d3135de7da07
+[2024-10-20T17:11:23.710+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='covid_wave_3_etl' AIRFLOW_CTX_TASK_ID='transform' AIRFLOW_CTX_EXECUTION_DATE='2024-10-20T17:04:13.362044+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-10-20T17:04:13.362044+00:00'
+[2024-10-20T17:11:23.775+0000] {python.py:194} INFO - Done. Returned value was: None
+[2024-10-20T17:11:23.785+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=covid_wave_3_etl, task_id=transform, execution_date=20241020T170413, start_date=20241020T171123, end_date=20241020T171123
+[2024-10-20T17:11:23.840+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2024-10-20T17:11:23.863+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,7 @@
+[2024-10-20T16:48:49.233+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: covid_wave_3_etl.extract scheduled__2024-09-05T00:00:00+00:00 [queued]>
+[2024-10-20T16:48:49.266+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: covid_wave_3_etl.extract scheduled__2024-09-05T00:00:00+00:00 [queued]>
+[2024-10-20T16:48:49.269+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2024-10-20T16:48:49.356+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): extract> on 2024-09-05 00:00:00+00:00
+[2024-10-20T16:48:49.402+0000] {standard_task_runner.py:57} INFO - Started process 127 to run task
+[2024-10-20T16:48:49.422+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'covid_wave_3_etl', 'extract', 'scheduled__2024-09-05T00:00:00+00:00', '--job-id', '463', '--raw', '--subdir', 'DAGS_FOLDER/covid_wave_3.py', '--cfg-path', '/tmp/tmpx_pj_t3s']
+[2024-10-20T16:48:49.425+0000] {standard_task_runner.py:85} INFO - Job 463: Subtask extract

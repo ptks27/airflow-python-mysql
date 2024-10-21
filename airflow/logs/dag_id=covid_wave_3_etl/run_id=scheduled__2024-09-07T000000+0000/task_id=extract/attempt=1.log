@@ -1,0 +1,3 @@
+[2024-10-20T16:48:49.289+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: covid_wave_3_etl.extract scheduled__2024-09-07T00:00:00+00:00 [queued]>
+[2024-10-20T16:48:49.351+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: covid_wave_3_etl.extract scheduled__2024-09-07T00:00:00+00:00 [queued]>
+[2024-10-20T16:48:49.355+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2

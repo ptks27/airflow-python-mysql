@@ -1,0 +1,99 @@
+[2024-10-20T17:07:45.259+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: covid_wave_3_etl.load scheduled__2024-09-07T00:00:00+00:00 [queued]>
+[2024-10-20T17:07:45.287+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: covid_wave_3_etl.load scheduled__2024-09-07T00:00:00+00:00 [queued]>
+[2024-10-20T17:07:45.289+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2024-10-20T17:07:45.326+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): load> on 2024-09-07 00:00:00+00:00
+[2024-10-20T17:07:45.344+0000] {standard_task_runner.py:57} INFO - Started process 324 to run task
+[2024-10-20T17:07:45.351+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'covid_wave_3_etl', 'load', 'scheduled__2024-09-07T00:00:00+00:00', '--job-id', '531', '--raw', '--subdir', 'DAGS_FOLDER/covid_wave_3.py', '--cfg-path', '/tmp/tmpw3lhe7c0']
+[2024-10-20T17:07:45.353+0000] {standard_task_runner.py:85} INFO - Job 531: Subtask load
+[2024-10-20T17:07:45.546+0000] {task_command.py:416} INFO - Running <TaskInstance: covid_wave_3_etl.load scheduled__2024-09-07T00:00:00+00:00 [running]> on host 0d584f57979f
+[2024-10-20T17:07:45.776+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='covid_wave_3_etl' AIRFLOW_CTX_TASK_ID='load' AIRFLOW_CTX_EXECUTION_DATE='2024-09-07T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-09-07T00:00:00+00:00'
+[2024-10-20T17:07:46.034+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/airflow/.local/lib/python3.8/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/home/airflow/.local/lib/python3.8/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "/home/airflow/.local/lib/python3.8/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.DataError: (1406, "Data too long for column 'data' at row 1")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/covid_wave_3.py", line 58, in load_to_db
+    df.to_sql('round-3-line', con=engine, if_exists='replace', index=False)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 2878, in to_sql
+    return sql.to_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 769, in to_sql
+    return pandas_sql.to_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1920, in to_sql
+    total_inserted = sql_engine.insert_records(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1470, in insert_records
+    raise err
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1461, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1023, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 929, in _execute_insert
+    result = conn.execute(self.table.insert(), data)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/airflow/.local/lib/python3.8/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/home/airflow/.local/lib/python3.8/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "/home/airflow/.local/lib/python3.8/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.DataError: (pymysql.err.DataError) (1406, "Data too long for column 'data' at row 1")
+[SQL: INSERT INTO `round-3-line` (data, links, meta, data_ingested_at) VALUES (%(data)s, %(links)s, %(meta)s, %(data_ingested_at)s)]
+[parameters: {'data': "[{'year': 2021, 'weeknum': 13, 'province': 'กรุงเทพมหานคร', 'age': '29', 'age_range': '20-29 ปี', 'occupation': 'ว่างงาน', 'type': 'ผู้ป่วยยืนยัน', ' ... (210339 characters truncated) ... พมหานคร', 'age': '75', 'age_range': '>= 70 ปี', 'occupation': 'ไม่ระบุ', 'type': 'ผู้ป่วยยืนยัน', 'death_cluster': '-', 'update_date': '2024-10-13'}]", 'links': "{'first': 'http://covid19.ddc.moph.go.th/api/Deaths/round-3-line-list?page=1', 'last': 'http://covid19.ddc.moph.go.th/api/Deaths/round-3-line-list?page=22', 'prev': None, 'next': 'http://covid19.ddc.moph.go.th/api/Deaths/round-3-line-list?page=2'}", 'meta': "{'current_page': 1, 'from': 1, 'last_page': 22, 'links': [{'url': None, 'label': '&laquo; Previous', 'active': False}, {'url': 'http://covid19.ddc.mo ... (1418 characters truncated) ... Next &raquo;', 'active': False}], 'path': 'http://covid19.ddc.moph.go.th/api/Deaths/round-3-line-list', 'per_page': 1000, 'to': 1000, 'total': 21604}", 'data_ingested_at': datetime.datetime(2024, 10, 20, 17, 7, 45, 844519)}]
+(Background on this error at: https://sqlalche.me/e/14/9h9h)
+[2024-10-20T17:07:46.105+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=covid_wave_3_etl, task_id=load, execution_date=20240907T000000, start_date=20241020T170745, end_date=20241020T170746
+[2024-10-20T17:07:46.143+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 531 for task load ((pymysql.err.DataError) (1406, "Data too long for column 'data' at row 1")
+[SQL: INSERT INTO `round-3-line` (data, links, meta, data_ingested_at) VALUES (%(data)s, %(links)s, %(meta)s, %(data_ingested_at)s)]
+[parameters: {'data': "[{'year': 2021, 'weeknum': 13, 'province': 'กรุงเทพมหานคร', 'age': '29', 'age_range': '20-29 ปี', 'occupation': 'ว่างงาน', 'type': 'ผู้ป่วยยืนยัน', ' ... (210339 characters truncated) ... พมหานคร', 'age': '75', 'age_range': '>= 70 ปี', 'occupation': 'ไม่ระบุ', 'type': 'ผู้ป่วยยืนยัน', 'death_cluster': '-', 'update_date': '2024-10-13'}]", 'links': "{'first': 'http://covid19.ddc.moph.go.th/api/Deaths/round-3-line-list?page=1', 'last': 'http://covid19.ddc.moph.go.th/api/Deaths/round-3-line-list?page=22', 'prev': None, 'next': 'http://covid19.ddc.moph.go.th/api/Deaths/round-3-line-list?page=2'}", 'meta': "{'current_page': 1, 'from': 1, 'last_page': 22, 'links': [{'url': None, 'label': '&laquo; Previous', 'active': False}, {'url': 'http://covid19.ddc.mo ... (1418 characters truncated) ... Next &raquo;', 'active': False}], 'path': 'http://covid19.ddc.moph.go.th/api/Deaths/round-3-line-list', 'per_page': 1000, 'to': 1000, 'total': 21604}", 'data_ingested_at': datetime.datetime(2024, 10, 20, 17, 7, 45, 844519)}]
+(Background on this error at: https://sqlalche.me/e/14/9h9h); 324)
+[2024-10-20T17:07:46.216+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2024-10-20T17:07:46.257+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
